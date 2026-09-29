@@ -1,12 +1,15 @@
-// swift-tools-version: 6.3.3
+// swift-tools-version: 6.4
 import CompilerPluginSupport
 import PackageDescription
 
 let package = Package(
     name: "swift-splat",
     platforms: [
-        .macOS(.v15),
-        .iOS(.v18),
+        .macOS(.v27),
+        .iOS(.v27),
+        .tvOS(.v27),
+        .watchOS(.v27),
+        .visionOS(.v27),
     ],
     products: [
         .library(
