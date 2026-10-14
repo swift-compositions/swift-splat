@@ -1,14 +1,5 @@
-//
-//  TypedThrowsFixture.swift
-//  swift-splat
-//
-//  Test fixture for cross-module typed throws testing
-//
-
 import Splat
 
-/// A fixture struct that uses @Splat with typed throws.
-/// Used to test that typed throws propagates correctly across module boundaries.
 @Splat
 public struct TypedThrowsFixture: Sendable {
     public let arguments: Arguments
@@ -28,7 +19,7 @@ public struct TypedThrowsFixture: Sendable {
         }
     }
 
-    public struct Error: Swift.Error, Sendable {
+    public struct Error: Swift::Error, Sendable {
         public let reason: String
 
         public init(reason: String) {
@@ -36,8 +27,6 @@ public struct TypedThrowsFixture: Sendable {
         }
     }
 }
-
-// MARK: - Non-throwing fixture for comparison
 
 public enum RegularNamespace {
     public enum Three10 {
@@ -66,17 +55,3 @@ public enum RegularNamespace {
         }
     }
 }
-
-// MARK: - Note on Backtick Parameter Names
-//
-// There is a Swift compiler bug where callable syntax `Type(args)` doesn't
-// correctly resolve @Splat-generated initializers with backtick-escaped
-// parameter names (names containing spaces) across module boundaries.
-// See https://github.com/swift-compositions/swift-splat/issues/9.
-//
-// Example of the bug:
-//   `SomeType`(`param with spaces`: value)  // FAILS - wrong init matched
-//   `SomeType`.init(`param with spaces`: value)  // WORKS
-//
-// The workaround is to always use explicit `.init` syntax when parameter
-// names contain spaces.

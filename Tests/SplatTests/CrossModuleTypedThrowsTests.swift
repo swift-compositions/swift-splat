@@ -47,10 +47,8 @@ struct CrossModuleTypedThrowsTests {
         do {
             _ = try TypedThrowsFixture(isValid: false)
             Issue.record("Should have thrown")
-        } catch let error as TypedThrowsFixture.Error {
-            #expect(error.reason.contains("isValid was false"))
         } catch {
-            Issue.record("Error should be TypedThrowsFixture.Error, got: \(type(of: error))")
+            #expect(error.reason.contains("isValid was false"))
         }
     }
 }

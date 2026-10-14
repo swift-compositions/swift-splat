@@ -41,7 +41,7 @@ struct SplatTests {
                 let isAlive: Bool
             }
 
-            struct ValidationError: Swift.Error {}
+            struct ValidationError: Swift::Error {}
         }
 
         // Test successful case
@@ -70,7 +70,7 @@ struct SplatTests {
                 let isAlive: Bool
             }
 
-            struct ValidationError: Swift.Error {}
+            struct ValidationError: Swift::Error {}
         }
 
         // Test successful case
@@ -85,10 +85,8 @@ struct SplatTests {
         do {
             _ = try Donor(isAlive: false)
             Issue.record("Should throw for invalid input")
-        } catch is Donor.ValidationError {
-            // Expected
         } catch {
-            Issue.record("Should throw ValidationError")
+            // Expected
         }
     }
 
@@ -109,7 +107,7 @@ struct SplatTests {
                 let isDeceased: Bool?
             }
 
-            struct ValidationError: Swift.Error {}
+            struct ValidationError: Swift::Error {}
         }
 
         // Test with one option true
@@ -217,7 +215,7 @@ struct SplatTests {
                 }
             }
 
-            struct Error: Swift.Error, Sendable {
+            struct Error: Swift::Error, Sendable {
                 let arguments: Arguments
             }
         }

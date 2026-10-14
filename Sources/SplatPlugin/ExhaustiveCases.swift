@@ -1,10 +1,6 @@
 import SwiftSyntax
 import SwiftSyntaxBuilder
 
-/// Self-contained generator for `static let allCases: [Arguments]`.
-///
-/// Produces an exhaustive array of all `Bool?` combinations (`true`, `false`, `nil`)
-/// when every property of the Arguments struct is `Bool?`. Returns `nil` otherwise.
 enum ExhaustiveCases {
 
     static func generate(
@@ -25,17 +21,13 @@ enum ExhaustiveCases {
             """
     }
 
-    // MARK: - Private
-
     private static func isBoolOptional(_ type: TypeSyntax) -> Bool {
-        // Match `Bool?`
         if let optional = type.as(OptionalTypeSyntax.self),
             let identifier = optional.wrappedType.as(IdentifierTypeSyntax.self),
             identifier.name.text == "Bool"
         {
             return true
         }
-        // Match `Optional<Bool>`
         if let identifier = type.as(IdentifierTypeSyntax.self),
             identifier.name.text == "Optional",
             let genericArgs = identifier.genericArgumentClause,
