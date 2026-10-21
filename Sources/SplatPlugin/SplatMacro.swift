@@ -304,23 +304,22 @@ public struct SplatMacro: MemberMacro {
                 guard let bKey = b.key else { return false }
                 return aKey < bKey
             }.map { key, props -> String in
-                if let pathComponent = key {
-                    let nestedProps = props.map { prop in
-                        PropertyInfo(
-                            name: prop.name,
-                            type: prop.type,
-                            doc: prop.doc,
-                            path: Array(prop.path.dropFirst()),
-                            defaultValue: prop.defaultValue
-                        )
-                    }
-                    let nestedInit = buildArgumentsInit(properties: nestedProps)
-                    return "\(splatArgumentLabel(pathComponent)): .init(\(nestedInit))"
-                } else {
+                guard let pathComponent = key else {
                     return props.map { "\(splatArgumentLabel($0.name)): `\($0.name)`" }.joined(
                         separator: ", "
                     )
                 }
+                let nestedProps = props.map { prop in
+                    PropertyInfo(
+                        name: prop.name,
+                        type: prop.type,
+                        doc: prop.doc,
+                        path: Array(prop.path.dropFirst()),
+                        defaultValue: prop.defaultValue
+                    )
+                }
+                let nestedInit = buildArgumentsInit(properties: nestedProps)
+                return "\(splatArgumentLabel(pathComponent)): .init(\(nestedInit))"
             }.joined(separator: ",\n        ")
         }
 
