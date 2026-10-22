@@ -232,7 +232,6 @@ However, requiring explicit Arguments construction for every initialization is v
 
 ## Related Packages
 
-- [swift-macro-testing](https://github.com/pointfreeco/swift-macro-testing) - Point-Free's toolkit for testing Swift macros
 - [swift-syntax](https://github.com/swiftlang/swift-syntax) - SwiftSyntax library for Swift AST manipulation
 
 ## License

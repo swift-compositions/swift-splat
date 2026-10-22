@@ -18,8 +18,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(url: "https://github.com/swiftlang/swift-syntax.git", "603.0.2"..<"604.0.0"),
-        .package(url: "https://github.com/pointfreeco/swift-macro-testing.git", from: "0.5.2"),
+        .package(url: "https://github.com/swiftlang/swift-syntax.git", "603.0.2"..<"604.0.0")
     ],
     targets: [
         // Compiler plugin with macro implementation
@@ -51,7 +50,6 @@ let package = Package(
             dependencies: [
                 .target(name: "Splat"),
                 .target(name: "SplatTestFixtures"),
-                .product(name: "MacroTesting", package: "swift-macro-testing"),
             ]
         ),
     ],
