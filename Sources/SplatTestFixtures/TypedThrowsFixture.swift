@@ -28,8 +28,6 @@ public struct TypedThrowsFixture: Sendable {
     }
 }
 
-public enum RegularNamespace {
-}
 
 extension RegularNamespace {
     public enum Three10 {
