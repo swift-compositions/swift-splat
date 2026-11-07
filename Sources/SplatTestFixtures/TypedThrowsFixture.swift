@@ -29,6 +29,9 @@ public struct TypedThrowsFixture: Sendable {
 }
 
 public enum RegularNamespace {
+}
+
+extension RegularNamespace {
     public enum Three10 {
         @Splat
         public struct One: Sendable {
@@ -53,5 +56,4 @@ public enum RegularNamespace {
                 }
             }
         }
-    }
-}
+    }}

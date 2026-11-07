@@ -2,7 +2,9 @@ import SwiftSyntax
 import SwiftSyntaxBuilder
 
 enum ExhaustiveCases {
+}
 
+extension ExhaustiveCases {
     static func generate(
         properties: [SplatMacro.PropertyInfo],
         structName: String
@@ -67,5 +69,4 @@ enum ExhaustiveCases {
         }
 
         return lines.joined(separator: "\n")
-    }
-}
+    }}
