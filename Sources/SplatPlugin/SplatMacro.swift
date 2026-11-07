@@ -16,6 +16,26 @@ func splatArgumentLabel(_ name: String) -> String {
 }
 
 public struct SplatMacro: MemberMacro {
+}
+
+enum SplatError: Swift::Error, CustomStringConvertible {
+    case noTargetStruct(String)
+    case noProperties
+}
+
+extension String {
+    func trimmingPrefix(_ prefix: String) -> String {
+        guard hasPrefix(prefix) else { return self }
+        return String(dropFirst(prefix.count))
+    }
+
+    func trimmingSuffix(_ suffix: String) -> String {
+        guard hasSuffix(suffix) else { return self }
+        return String(dropLast(suffix.count))
+    }
+}
+
+extension SplatMacro {
     struct PropertyInfo {
         let name: String
         let type: TypeSyntax
@@ -500,9 +520,7 @@ public struct SplatMacro: MemberMacro {
     }
 }
 
-enum SplatError: Swift::Error, CustomStringConvertible {
-    case noTargetStruct(String)
-    case noProperties
+extension SplatError {
 
     var description: String {
         switch self {
@@ -512,17 +530,5 @@ enum SplatError: Swift::Error, CustomStringConvertible {
         case .noProperties:
             return "Target struct has no stored properties to splat"
         }
-    }
-}
-
-extension String {
-    func trimmingPrefix(_ prefix: String) -> String {
-        guard hasPrefix(prefix) else { return self }
-        return String(dropFirst(prefix.count))
-    }
-
-    func trimmingSuffix(_ suffix: String) -> String {
-        guard hasSuffix(suffix) else { return self }
-        return String(dropLast(suffix.count))
     }
 }
