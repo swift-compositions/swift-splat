@@ -16,6 +16,9 @@ func splatArgumentLabel(_ name: String) -> String {
 }
 
 public struct SplatMacro: MemberMacro {
+}
+
+extension SplatMacro {
     struct PropertyInfo {
         let name: String
         let type: TypeSyntax
@@ -44,7 +47,6 @@ public struct SplatMacro: MemberMacro {
         conformingTo _: [TypeSyntax],
         in context: some MacroExpansionContext
     ) throws -> [DeclSyntax] {
-
         let structName: String
         let propertyName: String
 
@@ -503,7 +505,9 @@ public struct SplatMacro: MemberMacro {
 enum SplatError: Swift::Error, CustomStringConvertible {
     case noTargetStruct(String)
     case noProperties
+}
 
+extension SplatError {
     var description: String {
         switch self {
         case .noTargetStruct(let name):
