@@ -500,7 +500,7 @@ public struct SplatMacro: MemberMacro {
     }
 }
 
-fileprivate enum SplatError: Swift::Error, CustomStringConvertible {
+enum SplatError: Swift::Error, CustomStringConvertible {
     case noTargetStruct(String)
     case noProperties
 

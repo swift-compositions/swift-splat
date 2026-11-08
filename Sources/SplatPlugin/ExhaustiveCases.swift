@@ -2,9 +2,7 @@ import SwiftSyntax
 import SwiftSyntaxBuilder
 
 enum ExhaustiveCases {
-}
 
-extension ExhaustiveCases {
     static func generate(
         properties: [SplatMacro.PropertyInfo],
         structName: String
@@ -54,7 +52,7 @@ extension ExhaustiveCases {
 
         var lines: [String] = []
 
-        (0..<n).forEach { i in
+        for i in 0..<n {
             let nest = String(repeating: "    ", count: i)
             let op = i < n - 1 ? "flatMap" : "map"
             lines.append("\(nest)_v.\(op) { v\(i) in")
