@@ -19,7 +19,27 @@ public struct SplatMacro: MemberMacro {
 }
 
 extension SplatMacro {
+    struct PropertyInfo {
+        let name: String
+        let type: TypeSyntax
+        let doc: String?
+        let path: [String]
+        let defaultValue: InitializerClauseSyntax?
 
+        init(
+            name: String,
+            type: TypeSyntax,
+            doc: String?,
+            path: [String] = [],
+            defaultValue: InitializerClauseSyntax? = nil
+        ) {
+            self.name = name
+            self.type = type
+            self.doc = doc
+            self.path = path
+            self.defaultValue = defaultValue
+        }
+    }
 
     public static func expansion(
         of node: AttributeSyntax,
@@ -482,6 +502,10 @@ extension SplatMacro {
     }
 }
 
+enum SplatError: Swift::Error, CustomStringConvertible {
+    case noTargetStruct(String)
+    case noProperties
+}
 
 extension SplatError {
     var description: String {
