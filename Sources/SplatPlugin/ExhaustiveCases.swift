@@ -54,7 +54,7 @@ extension ExhaustiveCases {
 
         var lines: [String] = []
 
-        for i in 0..<n {
+        (0..<n).forEach { i in
             let nest = String(repeating: "    ", count: i)
             let op = i < n - 1 ? "flatMap" : "map"
             lines.append("\(nest)_v.\(op) { v\(i) in")
