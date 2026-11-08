@@ -12,7 +12,7 @@ import Testing
 struct CrossModuleTypedThrowsTests {
 
     @Test
-    func typedThrowsPropagatesAcrossModules() {
+    func `typed throws propagates across modules`() {
         // This test verifies that when calling a @Splat-generated initializer
         // from a different module, the typed throws information is preserved.
         //
@@ -31,7 +31,7 @@ struct CrossModuleTypedThrowsTests {
     }
 
     @Test
-    func typedThrowsSuccessCase() {
+    func `typed throws success case`() {
         // Verify the success case still works
         do {
             let fixture = try TypedThrowsFixture(isValid: true)
@@ -42,7 +42,7 @@ struct CrossModuleTypedThrowsTests {
     }
 
     @Test
-    func errorTypeIsCorrect() {
+    func `error type is correct`() {
         // Explicitly verify the error type
         do {
             _ = try TypedThrowsFixture(isValid: false)

@@ -15,7 +15,7 @@ struct InitSyntaxTests {
     // MARK: - Regular name tests (typed throws)
 
     @Test
-    func callableStyleTypedThrows() {
+    func `callable style typed throws`() {
         // Using TypeName(args) syntax - the "callable" style
         do {
             _ = try TypedThrowsFixture(isValid: false)
@@ -27,7 +27,7 @@ struct InitSyntaxTests {
     }
 
     @Test
-    func explicitInitTypedThrows() {
+    func `explicit init typed throws`() {
         // Using TypeName.init(args) syntax - explicit init
         do {
             _ = try TypedThrowsFixture(isValid: false)
@@ -40,14 +40,14 @@ struct InitSyntaxTests {
     // MARK: - Regular name tests (non-throwing)
 
     @Test
-    func regularCallableStyle() {
+    func `regular callable style`() {
         // Using RegularNamespace.Three10.One(args) syntax - callable style
         let result = RegularNamespace.Three10.One(conditionSatisfied: true)
         #expect(result.output == .valid)
     }
 
     @Test
-    func regularExplicitInit() {
+    func `regular explicit init`() {
         // Using RegularNamespace.Three10.One.init(args) syntax - explicit init
         let result = RegularNamespace.Three10.One(conditionSatisfied: true)
         #expect(result.output == .valid)
