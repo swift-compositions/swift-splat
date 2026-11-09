@@ -297,13 +297,17 @@ public struct SplatMacro: MemberMacro {
                 )
             }
 
-            let grouped = Dictionary(grouping: properties) { $0.path.first }
+            var groups: [(key: String?, props: [PropertyInfo])] = []
+            for property in properties {
+                let key = property.path.first
+                if let last = groups.indices.last, groups[last].key == key {
+                    groups[last].props.append(property)
+                } else {
+                    groups.append((key: key, props: [property]))
+                }
+            }
 
-            return grouped.sorted { a, b in
-                guard let aKey = a.key else { return true }
-                guard let bKey = b.key else { return false }
-                return aKey < bKey
-            }.map { key, props -> String in
+            return groups.map { key, props -> String in
                 guard let pathComponent = key else {
                     return props.map { "\(splatArgumentLabel($0.name)): `\($0.name)`" }.joined(
                         separator: ", "

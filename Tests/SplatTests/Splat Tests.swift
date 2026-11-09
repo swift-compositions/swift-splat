@@ -430,4 +430,46 @@ struct SplatTests {
         #expect(article.arguments.lid2.exception1 == false)
         #expect(article.arguments.lid2.exception2 == true)
     }
+
+    @Test func `splat with mixed direct and nested Arguments keeps declaration order`() {
+        @Splat
+        struct Report: Sendable {
+            let arguments: Arguments
+
+            init(_ arguments: Arguments) {
+                self.arguments = arguments
+            }
+
+            struct Arguments: Sendable {
+                let zulu: Zulu.Arguments
+                let title: String
+                let alpha: Alpha.Arguments
+                let count: Int
+            }
+
+            struct Zulu {
+                struct Arguments: Sendable {
+                    let condition: Bool
+                }
+            }
+
+            struct Alpha {
+                struct Arguments: Sendable {
+                    let exception: Bool
+                }
+            }
+        }
+
+        let report = Report(
+            condition: true,
+            title: "Mixed",
+            exception: false,
+            count: 3
+        )
+
+        #expect(report.arguments.zulu.condition == true)
+        #expect(report.arguments.title == "Mixed")
+        #expect(report.arguments.alpha.exception == false)
+        #expect(report.arguments.count == 3)
+    }
 }
